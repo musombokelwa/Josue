@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mon souhait pour toi DORCAS</title>
+  <style>
+    /* === Fond animé === */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(270deg, #538f6e, #e4e9e9, #091538, #30113a);
+      background-size: 800% 800%;
+      animation: gradientMove 15s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1, h2 {
+      color: #261c49;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+      animation: fadeIn 3s ease-in-out infinite alternate;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0.4; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1.05); }
+    }
+
+    .marquee-container {
+      width: 90%;
+      max-width: 400px;
+      overflow: hidden;
+      border: 2px solid #733a7e;
+      border-radius: 12px;
+      padding: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 0 auto 10px;
+    }
+    .marquee-text {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 1rem;
+      animation: marquee 10s linear infinite alternate;
+      color: #160b0b;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(calc(-60% + 50vw)); }
+    }
+
+    /* === La box centrale === */
+    .box {
+      width: 90%;
+      max-width: 500px;
+      padding: 15px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .box img {
+      max-width: 200px;
+      height: auto;
+      border-radius: 100%;
+      margin: 10px 0;
+    }
+    .box p {
+      font-size: 0.9rem;
+      color: #333;
+      text-align: justify;
+    }
+    .box video {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 10px;
+      border-radius: 12px;
+    }
+
+    /* === Localisation visible === */
+    .localisation {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #1d1414;
+      text-shadow: 2px 2px 6px rgba(17, 16, 16, 0.8);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>PORTRAIT DE DORCAS</h1>
+    <h2>Offert par Josue
+    </h2>
+    <img src="f10c183b-31ee-4af9-92e1-e17f949bb5b8.jpeg" alt="DORCAS"><br>
+
+    <div class="marquee-container">
+      <div class="marquee-text">
+        💌 Déclaration de Josue à DORCAS
+      </div>
+    </div>
+
+    <div id="text-container"></div>
+
+    <!-- Vidéo -->
+    <video controls autoplay loop muted>
+      <source src="JOSUE.mp4" type="video/mp4">
+      Ton navigateur ne supporte pas la vidéo.
+    </video>
+
+    <!-- Localisation -->
+    <div class="localisation" id="localisation">
+      📍 Lubumbashi — Destination : Lubumbashià Dorcas je voulais dire bonjour <br>
+      📅 Date : 27/08/2025 à 00h
+    </div>
+  </div>
+
+  <script>
+    // === Texte romantique avec effet mot après mot ===
+    const text = `
+   Dorcas,
+
+Il y a des rencontres qu’on prévoit,
+Des rendez-vous écrits à l’avance,
+Et puis il y a celles qui s’imposent,
+Comme une surprise que le destin dépose sur notre chemin.
+
+La nôtre fut de celles-là.
+C’est l’auditoire qui nous a réunis,
+Un lieu où tant de voix se croisent,
+Où tant de regards se perdent,
+Et pourtant… dans cette multitude,
+Un seul visage a retenu ma mémoire : le tien.
+
+J’ignore encore pourquoi,
+Parmi les rires et les paroles de tant d’autres,
+C’est ton sourire qui a tracé sa place dans mes pensées.
+Peut-être parce qu’il avait la clarté de l’aube,
+Ou peut-être parce qu’il contenait un mystère
+Que nul écho ne pouvait effacer.
+
+Lorsque je t’ai vu,
+Le temps a semblé se suspendre une seconde,
+Comme si la foule autour de nous
+Ne comptait plus vraiment.
+Il restait toi, et ce silence intérieur
+Où je découvrais qu’il existe des présences
+Qui s’imposent sans bruit,
+Mais qui bouleversent tout en profondeur.
+
+Je pourrais dire que ce fut un hasard.
+Mais au fond de moi, je sais
+Que certaines rencontres dépassent le hasard.
+Elles ressemblent à des chapitres
+Que la vie écrivait déjà
+Avant même que nous en tournions la page.
+
+Et pourtant, Dorcas,
+Si l’auditoire nous a rassemblés,
+Mon plus grand souhait est qu’il ne soit pas aussi
+La fin de ce chapitre.
+Car les foules se dissipent,
+Les événements s’achèvent,
+Les voix s’éteignent,
+Mais il y a quelque chose en moi qui murmure :
+"Que ce lien ne disparaisse jamais."
+
+J’aimerais que le temps n’ait pas la force
+De nous éloigner comme deux voyageurs
+Qui se croisent seulement à une gare.
+J’aimerais que la distance ne trouve pas les mots
+Pour séparer deux âmes
+Que le hasard a voulu réunir.
+
+Vois-tu, Dorcas,
+Il existe des visages qu’on oublie aussitôt,
+Et il existe des présences
+Qui deviennent comme des racines dans la mémoire.
+Toi, tu es cette présence-là.
+Une énigme douce,
+Une lumière discrète,
+Un parfum de mystère qui ne s’efface pas.
+
+Alors je laisse mes mots voyager vers toi,
+Non pas comme une déclaration,
+Mais comme une invitation silencieuse :
+À te souvenir que dans cette foule,
+Quelqu’un a trouvé en toi
+Une raison de croire que certaines rencontres
+Ne sont pas faites pour se perdre.
+
+Et si mes paroles tournent sans cesse
+Autour d’un centre invisible,
+C’est parce qu’il existe des vérités
+Qu’on ne dit pas directement…
+Mais qu’on espère qu’un cœur attentif devinera.
+
+Oui, Dorcas,
+C’est l’auditoire qui nous a réunis,
+Mais mon désir le plus discret,
+Celui que je cache derrière chaque mot,
+C’est qu’aucune force, ni le temps, ni la distance,
+Ne vienne jamais nous séparer.
+    `;
+    const textContainer = document.getElementById("text-container");
+    const words = text.split(" ");
+    let i = 0;
+    function showWords() {
+      if (i < words.length) {
+        textContainer.innerHTML += words[i] + " ";
+        i++;
+        setTimeout(showWords, 150);
+      }
+    }
+    showWords();
+  </script>
+</body>
+</html>
