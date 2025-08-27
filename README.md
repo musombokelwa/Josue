@@ -136,87 +136,32 @@
     const text = `
    Dorcas,
 
-Il y a des rencontres qu’on prévoit,
-Des rendez-vous écrits à l’avance,
-Et puis il y a celles qui s’imposent,
-Comme une surprise que le destin dépose sur notre chemin.
-
-La nôtre fut de celles-là.
+Parmi tant de voix et de regards,
 C’est l’auditoire qui nous a réunis,
-Un lieu où tant de voix se croisent,
-Où tant de regards se perdent,
-Et pourtant… dans cette multitude,
-Un seul visage a retenu ma mémoire : le tien.
+Mais c’est ton visage seul
+Qui est resté gravé dans ma mémoire,
+Comme une lumière discrète
+Qui suspend le temps et attire les pensées.
 
-J’ignore encore pourquoi,
-Parmi les rires et les paroles de tant d’autres,
-C’est ton sourire qui a tracé sa place dans mes pensées.
-Peut-être parce qu’il avait la clarté de l’aube,
-Ou peut-être parce qu’il contenait un mystère
-Que nul écho ne pouvait effacer.
-
-Lorsque je t’ai vu,
-Le temps a semblé se suspendre une seconde,
-Comme si la foule autour de nous
-Ne comptait plus vraiment.
-Il restait toi, et ce silence intérieur
-Où je découvrais qu’il existe des présences
-Qui s’imposent sans bruit,
-Mais qui bouleversent tout en profondeur.
-
-Je pourrais dire que ce fut un hasard.
-Mais au fond de moi, je sais
-Que certaines rencontres dépassent le hasard.
-Elles ressemblent à des chapitres
-Que la vie écrivait déjà
-Avant même que nous en tournions la page.
-
-Et pourtant, Dorcas,
-Si l’auditoire nous a rassemblés,
-Mon plus grand souhait est qu’il ne soit pas aussi
-La fin de ce chapitre.
-Car les foules se dissipent,
-Les événements s’achèvent,
-Les voix s’éteignent,
-Mais il y a quelque chose en moi qui murmure :
-"Que ce lien ne disparaisse jamais."
-
-J’aimerais que le temps n’ait pas la force
-De nous éloigner comme deux voyageurs
-Qui se croisent seulement à une gare.
-J’aimerais que la distance ne trouve pas les mots
-Pour séparer deux âmes
-Que le hasard a voulu réunir.
-
-Vois-tu, Dorcas,
-Il existe des visages qu’on oublie aussitôt,
-Et il existe des présences
-Qui deviennent comme des racines dans la mémoire.
-Toi, tu es cette présence-là.
-Une énigme douce,
-Une lumière discrète,
-Un parfum de mystère qui ne s’efface pas.
+Ton sourire, simple et mystérieux,
+A ce pouvoir de transformer le silence
+En un espace où tout devient possible.
+Je pourrais croire au hasard,
+Mais certaines rencontres dépassent le hasard,
+Elles sont des chapitres écrits d’avance
+Par la main invisible du destin.
 
 Alors je laisse mes mots voyager vers toi,
-Non pas comme une déclaration,
-Mais comme une invitation silencieuse :
-À te souvenir que dans cette foule,
-Quelqu’un a trouvé en toi
-Une raison de croire que certaines rencontres
-Ne sont pas faites pour se perdre.
-
-Et si mes paroles tournent sans cesse
-Autour d’un centre invisible,
-C’est parce qu’il existe des vérités
-Qu’on ne dit pas directement…
-Mais qu’on espère qu’un cœur attentif devinera.
+Non comme une déclaration,
+Mais comme un souffle discret
+Pour que ce lien né dans la foule
+Ne s’efface jamais.
 
 Oui, Dorcas,
-C’est l’auditoire qui nous a réunis,
-Mais mon désir le plus discret,
-Celui que je cache derrière chaque mot,
-C’est qu’aucune force, ni le temps, ni la distance,
-Ne vienne jamais nous séparer.
+C’est l’auditoire qui nous a rapprochés,
+Mais mon vœu secret demeure :
+Que rien, ni le temps, ni la distance,
+Ne parvienne à nous séparer.
     `;
     const textContainer = document.getElementById("text-container");
     const words = text.split(" ");
