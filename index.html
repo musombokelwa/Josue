@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pour Salama — 2 Novembre 2026</title>
+  <meta name="description" content="Un cadeau personnel et sincère pour les 20 ans de Salama.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+  <audio id="main-audio" src="assets/audio/anniversaire_chretien.mp3" preload="auto" loop></audio>
+
+  <!-- ─── LECTEUR MUSICAL FLOTTANT ─── -->
+  <aside id="audio-widget" class="audio-widget" aria-label="Lecteur musical" hidden>
+    <button id="music-toggle-btn" class="music-btn" aria-label="Lecture / Pause">
+      <span class="music-icon" id="music-icon" aria-hidden="true">♪</span>
+      <div class="music-info">
+        <span class="music-title">Mike Kalambay — C'est ton jour</span>
+        <span class="music-sub">✝ Joyeux Anniversaire Chrétien</span>
+      </div>
+      <div class="eq-bars" id="eq-bars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </button>
+    <label class="upload-label" title="Changer la chanson">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <input type="file" id="custom-audio-input" accept="audio/*" aria-label="Choisir un fichier audio">
+    </label>
+  </aside>
+
+  <!-- ════════════════════════════════════════════
+       ÉCRAN D'ACCÈS — MOT DE PASSE
+       ════════════════════════════════════════════ -->
+  <main id="lock-screen" class="lock-screen">
+
+    <div class="lock-grid">
+
+      <!-- En-tête dans le conteneur grid -->
+      <header class="lock-header">
+        <span class="lock-tag">Accès privé</span>
+        <h1 class="lock-title">Donne-moi le mot de passe</h1>
+        <p class="lock-desc">Entre ta date de naissance pour découvrir ce que j'ai préparé pour toi</p>
+      </header>
+
+      <!-- Enveloppe rouge -->
+      <figure class="envelope-wrap" aria-hidden="true">
+        <div class="envelope" id="envelope">
+          <div class="env-flap"></div>
+          <div class="env-body"></div>
+          <div class="env-seal" id="env-seal"><span>S</span></div>
+          <div class="env-letter" id="env-letter">
+            <p class="env-letter-text">Joyeux anniversaire<br>mon amour</p>
+            <span class="env-letter-heart">❤</span>
+          </div>
+        </div>
+      </figure>
+
+      <!-- Légende sous l'enveloppe -->
+      <p class="envelope-legend">Joyeux anniversaire mon bb Salama ✦</p>
+
+      <!-- Formulaire d'accès -->
+      <form id="auth-form" class="auth-form" autocomplete="off" novalidate>
+        <label class="field-label" for="dob-input">Ta date de naissance</label>
+        <div class="field-row">
+          <div class="field-wrap">
+            <input
+              id="dob-input"
+              type="text"
+              class="dob-input"
+              placeholder="JJ-MM-AAAA"
+              maxlength="10"
+              inputmode="numeric"
+              autocomplete="off"
+              spellcheck="false"
+            >
+          </div>
+          <button type="submit" class="btn-unlock">
+            Ouvrir
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <p id="error-msg" class="error-msg" role="alert" aria-live="polite" hidden>
+          Ce n'est pas la bonne date. Rappelle-toi bien de ta date de naissance.
+        </p>
+      </form>
+
+    </div>
+  </main>
+
+  <!-- ════════════════════════════════════════════
+       EXPÉRIENCE SLIDES
+       ════════════════════════════════════════════ -->
+  <section id="slides-section" class="slides-section" hidden>
+
+    <!-- Barre de progression -->
+    <div class="progress-track" aria-hidden="true">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="slides-nav" aria-label="Navigation entre les sections">
+      <span class="nav-label">Pour Salama ❤</span>
+      <div class="nav-center">
+        <button id="prev-btn" class="nav-arrow" aria-label="Précédent">‹</button>
+        <div class="nav-dots" id="nav-dots" role="tablist" aria-label="Sections">
+          <button class="dot active" data-index="0" role="tab" aria-selected="true" aria-label="Section 1"></button>
+          <button class="dot" data-index="1" role="tab" aria-selected="false" aria-label="Section 2"></button>
+          <button class="dot" data-index="2" role="tab" aria-selected="false" aria-label="Section 3"></button>
+          <button class="dot" data-index="3" role="tab" aria-selected="false" aria-label="Section 4"></button>
+          <button class="dot" data-index="4" role="tab" aria-selected="false" aria-label="Section 5"></button>
+        </div>
+        <button id="next-btn" class="nav-arrow" aria-label="Suivant">›</button>
+      </div>
+      <button id="autoplay-btn" class="autoplay-btn" title="Lecture automatique" aria-pressed="true">⏸</button>
+    </nav>
+
+    <!-- Conteneur des slides -->
+    <div class="slides-wrap" id="slides-wrap">
+
+      <!-- ── SLIDE 1 : LE GRAND JOUR ── -->
+      <article class="slide slide--active" data-slide="0" aria-label="Le grand jour">
+        <div class="slide-inner card-frosted slide-hero">
+          <span class="slide-eyebrow">2 Novembre 2026</span>
+          <h2 class="slide-hero-title">
+            Ce jour mérite<br>
+            <em>bien plus qu'un mot.</em>
+          </h2>
+          <p class="slide-hero-sub">Joyeux anniversaire, mon bb</p>
+
+          <div class="heart-stage" id="heart-stage" aria-hidden="true">
+            <span class="heart-emoji">❤</span>
+            <span class="ring ring-1"></span>
+            <span class="ring ring-2"></span>
+          </div>
+
+          <button class="btn-primary" id="btn-continue" type="button">
+            Ouvrir
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+
+          <p class="scroll-hint" aria-hidden="true">Fais défiler pour découvrir ↓</p>
+        </div>
+      </article>
+
+      <!-- ── SLIDE 2 : LA LETTRE ── -->
+      <article class="slide" data-slide="1" aria-label="Une lettre pour toi">
+        <div class="slide-inner card-paper">
+          <header class="letter-header">
+            <span class="letter-icon" aria-hidden="true">✉</span>
+            <h2 class="letter-title">Une lettre rien que pour toi</h2>
+            <div class="letter-rule" aria-hidden="true"></div>
+          </header>
+
+          <div class="letter-body">
+            <p class="letter-open">Joyeux anniversaire,</p>
+            <p>
+              J'avais envie de prendre le temps de te dire à quel point tu comptes.
+            </p>
+            <blockquote class="letter-quote">
+              Merci pour chaque rire, chaque souvenir et tout ce que tu es — tu rends chaque chose plus belle.
+            </blockquote>
+            <p>
+              Cette surprise rassemble quelques mots de mon cœur, pour te rappeler que ta présence illumine ma vie, chaque jour, sans exception.
+            </p>
+          </div>
+
+          <footer class="letter-footer">
+            <p class="letter-sign-line">Avec tout mon amour,</p>
+            <p class="letter-sign">Pour toujours le tien ❤</p>
+          </footer>
+        </div>
+      </article>
+
+      <!-- ── SLIDE 3 : GALERIE ── -->
+      <article class="slide" data-slide="2" aria-label="Galerie de souvenirs">
+        <div class="slide-inner gallery-slide">
+          <header class="section-head">
+            <span class="eyebrow-tag">Souvenirs</span>
+            <h2 class="section-h2">Nos moments ensemble</h2>
+            <p class="section-sub">Chaque image, une histoire à part entière</p>
+          </header>
+
+          <div class="gallery-grid">
+
+            <!-- Photo 1 : Carte spéciale (nos pas ensemble) -->
+            <div class="gallery-card gallery-card--featured" id="gallery-card-1" tabindex="0" role="button" aria-label="Voir photo — Nos pas côte à côte">
+              <div class="gallery-img-wrap">
+                <img src="assets/images/salama_1.jpg" alt="Nos pas côte à côte" class="gallery-img" loading="lazy">
+              </div>
+              <div class="gallery-caption gallery-caption--featured">
+                <span class="caption-number">01</span>
+                <h3 class="caption-title">Nos pas côte à côte</h3>
+                <p class="caption-text">
+                  Sur cette image, c'est nous deux. Ce chemin que nous bâtissons ensemble, pas à pas, sans se lâcher la main. Ma plus belle place dans ce monde sera toujours à tes côtés. Je t'aime au-delà des étoiles.
+                </p>
+              </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="gallery-card" tabindex="0" role="button" aria-label="Voir photo — Ton sourire">
+              <div class="gallery-img-wrap">
+                <img src="assets/images/salama_main.jpg" alt="Salama souriante" class="gallery-img" loading="lazy">
+              </div>
+              <div class="gallery-caption">
+                <span class="caption-number">02</span>
+                <h3 class="caption-title">Ton sourire</h3>
+                <p class="caption-text">Cette étincelle dans ton regard qui désarme tout.</p>
+              </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="gallery-card" tabindex="0" role="button" aria-label="Voir photo — Ton élégance">
+              <div class="gallery-img-wrap">
+                <img src="assets/images/salama_photo2.jpg" alt="Salama élégante" class="gallery-img" loading="lazy">
+              </div>
+              <div class="gallery-caption">
+                <span class="caption-number">03</span>
+                <h3 class="caption-title">Ton élégance</h3>
+                <p class="caption-text">Ce port naturel qui fait rayonner chaque lieu où tu poses tes pieds.</p>
+              </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="gallery-card" tabindex="0" role="button" aria-label="Voir photo — Ta sérénité">
+              <div class="gallery-img-wrap">
+                <img src="assets/images/salama_photo3.jpg" alt="Salama sereine" class="gallery-img" loading="lazy">
+              </div>
+              <div class="gallery-caption">
+                <span class="caption-number">04</span>
+                <h3 class="caption-title">Ta sérénité</h3>
+                <p class="caption-text">Cette confiance tranquille qui m'inspire chaque jour davantage.</p>
+              </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="gallery-card" tabindex="0" role="button" aria-label="Voir photo — Ton éclat">
+              <div class="gallery-img-wrap">
+                <img src="assets/images/salama_photo4.jpg" alt="Salama lumineuse" class="gallery-img" loading="lazy">
+              </div>
+              <div class="gallery-caption">
+                <span class="caption-number">05</span>
+                <h3 class="caption-title">Ton éclat</h3>
+                <p class="caption-text">Près de toi, même les nuits les plus ordinaires deviennent mémorables.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </article>
+
+      <!-- ── SLIDE 4 : CE QUI TE REND UNIQUE & COMPTEUR ── -->
+      <article class="slide" data-slide="3" aria-label="Ce qui te rend unique">
+        <div class="slide-inner card-frosted unique-slide">
+
+          <header class="section-head">
+            <span class="eyebrow-tag">Portrait</span>
+            <h2 class="section-h2">Ce qui te rend unique</h2>
+            <p class="section-sub">Quatre choses que j'admire profondément en toi</p>
+          </header>
+
+          <div class="traits-grid">
+            <div class="trait-item">
+              <div class="trait-num">01</div>
+              <div class="trait-body">
+                <h3 class="trait-title">Ta façon de comprendre</h3>
+                <p class="trait-desc">Une intelligence du cœur rare — tu saisis les choses avec une profondeur que peu de gens possèdent.</p>
+              </div>
+            </div>
+
+            <div class="trait-item">
+              <div class="trait-num">02</div>
+              <div class="trait-body">
+                <h3 class="trait-title">Ta responsabilité &amp; ton assurance</h3>
+                <p class="trait-desc">Cette maturité naturelle et cette confiance tranquille qui inspirent le respect sans que tu aies besoin de le chercher.</p>
+              </div>
+            </div>
+
+            <div class="trait-item">
+              <div class="trait-num">03</div>
+              <div class="trait-body">
+                <h3 class="trait-title">Ta manière de gérer</h3>
+                <p class="trait-desc">Ton équilibre face aux défis, ta dignité dans l'adversité, et cette maîtrise qui me surprend encore.</p>
+              </div>
+            </div>
+
+            <div class="trait-item">
+              <div class="trait-num">04</div>
+              <div class="trait-body">
+                <h3 class="trait-title">Ton calme &amp; tes décisions</h3>
+                <p class="trait-desc">Cette paix intérieure même sous pression, et ce courage d'aller au bout de ce que tu choisis.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compteur de temps depuis 2-11-2006 -->
+          <div class="counter-block">
+            <div class="counter-meta">
+              <span class="counter-eyebrow">Depuis le 2 novembre 2006</span>
+              <h3 class="counter-heading">Une année de plus dans nos cœurs</h3>
+            </div>
+            <div class="counter-grid">
+              <div class="counter-unit">
+                <span class="counter-val" id="count-years">20</span>
+                <span class="counter-label">ans</span>
+              </div>
+              <div class="counter-sep" aria-hidden="true">:</div>
+              <div class="counter-unit">
+                <span class="counter-val" id="count-days">7305</span>
+                <span class="counter-label">jours</span>
+              </div>
+              <div class="counter-sep" aria-hidden="true">:</div>
+              <div class="counter-unit">
+                <span class="counter-val" id="count-hours">00</span>
+                <span class="counter-label">heures</span>
+              </div>
+              <div class="counter-sep" aria-hidden="true">:</div>
+              <div class="counter-unit">
+                <span class="counter-val" id="count-minutes">00</span>
+                <span class="counter-label">min</span>
+              </div>
+              <div class="counter-sep" aria-hidden="true">:</div>
+              <div class="counter-unit accent-unit">
+                <span class="counter-val" id="count-seconds">00</span>
+                <span class="counter-label">sec</span>
+              </div>
+            </div>
+            <p class="counter-note">Chaque seconde passée à t'aimer est un cadeau.</p>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- ── SLIDE 5 : FINAL — OMBRE ET LUMIÈRE ── -->
+      <article class="slide" data-slide="4" aria-label="Le mot de la fin">
+        <div class="slide-inner finale-slide">
+
+          <div class="finale-bg" aria-hidden="true">
+            <img src="assets/images/romantic_silhouette.jpg" alt="" class="finale-bg-img">
+            <div class="finale-overlay"></div>
+          </div>
+
+          <div class="finale-content">
+
+            <header class="finale-head">
+              <h2 class="finale-title">Joyeux Anniversaire</h2>
+              <p class="finale-vow">
+                Je t'aime, bb — et si on me demandait de recommencer, je te choisirais encore.
+              </p>
+              <div class="finale-rule" aria-hidden="true"></div>
+            </header>
+
+            <!-- Lecteur de chanson chrétienne -->
+            <div class="song-player" role="region" aria-label="Chanson d'anniversaire chrétienne">
+              <div class="song-icon" aria-hidden="true">♪</div>
+              <div class="song-info">
+                <span class="song-eyebrow">✝ Chanson chrétienne d'anniversaire</span>
+                <h3 class="song-title">Mike Kalambay — C'est ton jour</h3>
+                <p class="song-verse">« Que la grâce et la faveur divine reposent sur toi en ce jour béni. »</p>
+              </div>
+              <button id="slide5-play-btn" class="song-btn" aria-label="Écouter la chanson">
+                <span id="slide5-play-icon" aria-hidden="true">▶</span>
+                <span id="slide5-play-text">Écouter</span>
+              </button>
+            </div>
+
+            <!-- 3 cartes finales -->
+            <div class="finale-grid">
+
+              <div class="finale-card">
+                <span class="finale-card-icon" aria-hidden="true">🌊</span>
+                <h3 class="finale-card-title">J'adore l'eau</h3>
+                <p class="finale-card-text">
+                  « Tu m'as émue. Mon amour pour toi est aussi vaste et profond que l'océan. »
+                </p>
+                <span class="finale-card-emoji" aria-hidden="true">🥺❤</span>
+              </div>
+
+              <div class="finale-card">
+                <span class="finale-card-icon" aria-hidden="true">✉</span>
+                <h3 class="finale-card-title">Un mot secret</h3>
+                <p class="finale-card-text">
+                  « Rien n'égalera jamais la pureté de ton cœur. Merci d'être entrée dans ma vie. »
+                </p>
+                <button class="btn-secret" id="btn-secret-open" type="button">Lire la suite</button>
+              </div>
+
+              <div class="finale-card finale-card--light">
+                <span class="finale-card-icon" aria-hidden="true">☀</span>
+                <h3 class="finale-card-title">Dans la lumière</h3>
+                <p class="finale-card-text">
+                  « Même quand le soleil décline, ton éclat reste permanent. Tu es la lumière sur mon chemin. »
+                </p>
+                <span class="finale-card-note">Pour toujours, Salama.</span>
+              </div>
+
+            </div>
+
+            <footer class="finale-foot">
+              <button id="btn-replay" class="btn-replay" type="button">
+                Revivre depuis le début
+              </button>
+            </footer>
+
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ─── MODAL MOT SECRET ─── -->
+  <dialog id="secret-modal" class="modal" aria-labelledby="modal-title">
+    <div class="modal-inner">
+      <button class="modal-close" id="modal-close" aria-label="Fermer">✕</button>
+      <span class="modal-icon" aria-hidden="true">❤</span>
+      <h3 class="modal-title" id="modal-title">Une promesse</h3>
+      <p class="modal-body">
+        Salama, peu importe où la vie nous mènera, mon cœur t'appartiendra toujours.
+        Tu es mon cadeau le plus précieux — aujourd'hui pour tes 20 ans, et pour tous les jours qui viennent.
+        Je t'aime à l'infini.
+      </p>
+      <p class="modal-sig">Ton plus grand admirateur ❤</p>
+    </div>
+  </dialog>
+
+  <!-- ─── LIGHTBOX PHOTOS ─── -->
+  <dialog id="lightbox" class="lightbox" aria-label="Photo en grand">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>
+    <figure class="lightbox-fig">
+      <img src="" alt="" id="lightbox-img" class="lightbox-img">
+      <figcaption id="lightbox-cap" class="lightbox-cap"></figcaption>
+    </figure>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
